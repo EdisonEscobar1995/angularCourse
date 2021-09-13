@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+  <app-formulario
+    (resultadoOperacion) = "resultadoSuma($event)"
+  ></app-formulario>
+  <hr />
+  <app-resultado
+    [resultadoSuma] = "resultado"
+  ></app-resultado>
+</div>

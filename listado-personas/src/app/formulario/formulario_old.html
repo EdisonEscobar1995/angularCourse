@@ -1,0 +1,52 @@
+<form class="row g-3">
+  <div class="form-group mb-3 col-md-3">
+    <label for="nombre" class="visually-hidden">Nombre</label>
+    <!--
+      Input con binding
+    <input
+      type="text"
+      name="nombre"
+      id="nombre"
+      placeholder="Nombre"
+      class="form-control"
+      [(ngModel)]="nombreInput"
+    />-->
+    <input
+      type="text"
+      name="nombre"
+      id="nombre"
+      placeholder="Nombre"
+      class="form-control"
+      #nomInput
+    />
+  </div>
+  <div class="form-group mb-3 col-md-3">
+    <label for="apellido" class="visually-hidden">Apellido</label>
+    <!-- <input
+      type="text"
+      name="apellido"
+      id="apellido"
+      placeholder="Apellido"
+      class="form-control"
+      [(ngModel)]="apellidoInput"
+    /> -->
+    <input
+      type="text"
+      name="apellido"
+      id="apellido"
+      placeholder="Apellido"
+      class="form-control"
+      #apeInput
+    />
+  </div>
+  <div class="col">
+    <!--
+      Boton con referencia directa
+    <button type="submit" class="btn btn-primary" (click)="agregarPersona(nomInput, apeInput)">
+      Agregar
+    </button>-->
+    <button type="submit" class="btn btn-primary" (click)="agregarPersona()">
+      Agregar
+    </button>
+  </div>
+</form>

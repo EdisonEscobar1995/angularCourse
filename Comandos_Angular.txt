@@ -1,0 +1,26 @@
+Crear aplicacion angular
+ - ng new nombreAplicacion
+
+Subir servidor desarrollo Angular
+ - ng serve -o
+
+Crear componente Angular
+ - ng generate component NombreComponent
+ - ng g c NombreComponent
+
+Intalar y configurar bootstrap
+ - npm install bootstrap --save
+ - npm install popper.js --save
+ - npm i bootstrap popper.js --save
+
+ - Luego de instalarlo se debe configurar en el angular.json, en los apartados de styles y scripts
+  "styles": [
+      "src/styles.css",
+      "node_modules/bootstrap/dist/css/bootstrap.min.css"
+   ],
+   "scripts": [
+       "node_modules/popper.js/dist/umd/popper.min.js",
+       "node_modules/bootstrap/dist/js/bootstrap.min.js"
+   ]
+
+
