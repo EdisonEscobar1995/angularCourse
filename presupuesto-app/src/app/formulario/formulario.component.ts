@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Egreso } from '../egreso/egreso.model';
 import { EgresoServicio } from '../egreso/egreso.servicio';
+import { Ingreso } from '../ingreso/ingreso.model';
 import { IngresoServicio } from '../ingreso/ingreso.servicio';
 
 @Component({
@@ -23,7 +25,11 @@ export class FormularioComponent implements OnInit {
   }
 
   agregarValor(): void {
-
+    if (this.tipo === 'ingresoOp') {
+      this.ingresoServicio.ingresos.push(new Ingreso(this.descripcionInput, this.valorInput));
+    } else {
+      this.egresoServicio.egresos.push(new Egreso(this.descripcionInput, this.valorInput));
+    }
   }
 
 }
