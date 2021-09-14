@@ -1,0 +1,75 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoggingService } from '../../LoggingService.service';
+import { Persona } from '../../persona.model';
+import { PersonasService } from '../../personas.service';
+
+@Component({
+  selector: 'app-formulario',
+  templateUrl: './formulario.component.html',
+  styleUrls: ['./formulario.component.css']
+})
+export class FormularioComponent implements OnInit {
+
+  /* TODO:  este codigo es con Two way binding */
+
+  nombreInput: string = '';
+  apellidoInput: string = '';
+  index:number;
+  modoEdicion:number;
+
+  constructor(
+    private loggingService: LoggingService,
+    private personasService: PersonasService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+    this.personasService.saludar.subscribe(
+      (indice: number) => alert("El indice es = " + indice)
+    );
+  }
+
+  ngOnInit() {
+    this.index = this.route.snapshot.params['id'];
+    this.modoEdicion = +this.route.snapshot.queryParams['modoEdicion'];
+    if (this.index) {
+      let persona: Persona = this.personasService.encontrarPersona(this.index);
+      this.nombreInput = persona.nombre;
+      this.apellidoInput = persona.apellido;
+    }
+  }
+
+  onGuardarPersona(): void {
+    let persona1 = new Persona(this.nombreInput, this.apellidoInput);
+    if (this.index) {
+      this.personasService.modificarPersona(this.index, persona1);
+    } else {
+      this.personasService.agregarPersona(persona1);
+    }
+    this.router.navigate(['personas']);
+  }
+
+  eliminarPersona(): void {
+    if (this.index !== null) {
+      this.personasService.eliminarPersona(this.index);
+      this.router.navigate(['personas']);
+    }
+  }
+
+  /* Esta funcion es con referencia directa
+  agregarPersona(nomInput: HTMLInputElement, apeInput: HTMLInputElement) {
+    let persona1 = new Persona(nomInput.value, apeInput.value);
+    // this.personas.push(persona1);
+    this.personaCreada.emit(persona1);
+  } */
+
+  /* @ViewChild('nomInput') nomInput: ElementRef;
+  @ViewChild('apeInput') apeInput: ElementRef;
+
+  onAgregarPersona() {
+    let persona1 = new Persona(this.nomInput.nativeElement.value, this.apeInput.nativeElement.value);
+    this.loggingService.enviarMesajeAConsola("Enviamos persona: " + JSON.stringify(persona1));
+    // this.personaCreada.emit(persona1);
+    this.personasService.agregarPersona(persona1);
+  } */
+}
