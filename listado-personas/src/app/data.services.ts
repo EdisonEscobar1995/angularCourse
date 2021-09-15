@@ -17,7 +17,8 @@ export class DataServices {
 
   // Guardar personas
   guardarPersonas(personas: Persona[]): void {
-    this.httpClient.put('https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos.json', personas)
+    const token = this.loginService.getIdToken();
+    this.httpClient.put('https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos.json?auth=' + token, personas)
     .subscribe(
       response => {
         console.log("Resultado de guardar personas = ", response);
@@ -27,8 +28,9 @@ export class DataServices {
   }
 
   modificarPersona(index: number, personas: Persona) {
+    const token = this.loginService.getIdToken();
     let url:string;
-    url = `https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos/${index}.json`;
+    url = `https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos/${index}.json?auth=${token}`;
     this.httpClient.put(url, personas)
       .subscribe(
         response => console.log("response modificacion Persona = ", response),
@@ -37,8 +39,9 @@ export class DataServices {
   }
 
   eliminarPersona(index: number) {
+    const token = this.loginService.getIdToken();
     let url:string;
-    url = `https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos/${index}.json`;
+    url = `https://listado-personas-5f51b-default-rtdb.firebaseio.com/datos/${index}.json?auth=${token}`;
     this.httpClient.delete(url)
       .subscribe(
         response => console.log("response eliminar Persona = ", response),
