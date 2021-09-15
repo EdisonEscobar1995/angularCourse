@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoggingService } from './LoggingService.service';
-import { Persona } from './persona.model';
-import { PersonasService } from './personas.service';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +8,14 @@ import { PersonasService } from './personas.service';
 })
 export class AppComponent implements OnInit {
   titulo = 'Listado de Personas';
-  personas: Persona[] = [];
 
-  constructor(private loggingService: LoggingService,
-    private personasService: PersonasService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.personas = this.personasService.personas;
+    firebase.initializeApp({
+      apiKey: "AIzaSyBvELleQKgv8gvDsz_7NMWWWxLnMIPoQss",
+      authDomain: "listado-personas-5f51b.firebaseapp.com",
+    });
   }
 
-  /* personaAgregada(persona: Persona) {
-    // this.personas.push(persona);
-    // this.loggingService.enviarMesajeAConsola("agregamos al arreglo la persona = " + persona.nombre);
-    this.personasService.agregarPersona(persona);
-  } */
 }
